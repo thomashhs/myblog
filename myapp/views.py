@@ -45,6 +45,10 @@ def search_time(request,b_time):
 
     try:
         blogs = Article.objects.filter(date_time__contains=datetime.date(int(b_time[:4]),int(b_time[4:6]),int(b_time[6:8])))
+        var2=[]
+        for var in blogs:
+            var2.append(var.title)
+        return HttpResponse(var2)
         paginator = Paginator(blogs, 2)
         page = request.GET.get('page')
         blogs = fun_paginator(paginator, page)

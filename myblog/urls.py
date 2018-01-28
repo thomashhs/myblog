@@ -13,9 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url,include
 from django.contrib import admin
 from myapp import views
+#from DjangoUeditor import urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -24,5 +25,6 @@ urlpatterns = [
     url(r'^tag/(?P<b_tag>\w+)/$', views.search_tag,name="search_tag"),
     url(r'^time/(?P<b_time>\w+)/$', views.search_time,name="search_time"),
     url(r'^search/$', views.search_blog,name="search_blog"),
+    url(r'^ueditor/',include("DjangoUeditor.urls")),
 ]
 
