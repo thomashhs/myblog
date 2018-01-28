@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load custom_markdown %}
+
+{% block content %}
+    <div class="posts">
+        {% if error %}
+            {% for var in error %}
+                <h2 class="post-title">{{ var }}</h2>
+            {% endfor %}
+        {% else %}
+            {% for blog in blogs %}
+                <section class="post">
+                    <header class="post-header">
+                        <h2 class="post-title"><a href="{% url 'detail' b_id=blog.id %}">{{ blog.title }}</a></h2>
+
+                        <p class="post-meta">
+                            Time:<a href="{% url 'search_time' blog.date_time|date:'Ymd' %}" class="post-author">{{ blog.date_time|date:"Y /m /d" }}</a> under
+                            <a class="post-category post-category-js" href="{% url 'search_tag' b_tag=blog.category %}">{{ blog.category }}</a>
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>
+                            {{ blog.content|custom_markdown|truncatewords_html:"5" }}
+                        </p>
+                    </div>
+                    <a class="pure-button" href="{% url 'detail' b_id=blog.id %}">ReadMore >>></a>
+                </section>
+             {% endfor %}
+
+
+        <div class="pagination">
+        <span class="step-links">
+        {% if blogs.has_previous %}
+            <a href="?page={{ blogs.previous_page_number }}">Pre</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}.
+        </span>
+
+        {% if blogs.has_next %}
+            <a href="?page={{ blogs.next_page_number }}">Next</a>
+        {% endif %}
+        </span>
+        </div>
+
+    </div>
+{% endif %}
+{% endblock %}
