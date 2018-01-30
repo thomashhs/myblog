@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from myapp.models import Article
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 import datetime
+from myapp.forms import RegisterForm
 # Create your views here.
 
 def fun_paginator(paginator,page):
@@ -45,10 +46,6 @@ def search_time(request,b_time):
 
     try:
         blogs = Article.objects.filter(date_time__contains=datetime.date(int(b_time[:4]),int(b_time[4:6]),int(b_time[6:8])))
-        var2=[]
-        for var in blogs:
-            var2.append(var.title)
-        return HttpResponse(var2)
         paginator = Paginator(blogs, 2)
         page = request.GET.get('page')
         blogs = fun_paginator(paginator, page)
@@ -81,3 +78,13 @@ def search_blog(request):
     page = request.GET.get('page')
     blogs = fun_paginator(paginator, page)
     return render_to_response("home.html", {'blogs': blogs})
+
+def register(request):
+    if request.method=='POST':
+        form=RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/test')
+    else:
+        form=RegisterForm()
+    return render_to_response("register.html",{'form':form})

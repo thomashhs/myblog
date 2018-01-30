@@ -26,5 +26,8 @@ urlpatterns = [
     url(r'^time/(?P<b_time>\w+)/$', views.search_time,name="search_time"),
     url(r'^search/$', views.search_blog,name="search_blog"),
     url(r'^ueditor/',include("DjangoUeditor.urls")),
+    url(r'^register/$', views.register,name="register"),
+
+    url(r'^users/', include("django.contrib.auth.urls")),
 ]
 

@@ -1,6 +1,6 @@
 from django.db import models
 from DjangoUeditor.models import UEditorField
-
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class Article(models.Model):
@@ -16,3 +16,9 @@ class Article(models.Model):
 
     class Meta:
         ordering=['-date_time']
+
+class User(AbstractUser):
+    nickname=models.CharField(max_length=50,blank=True)
+
+    class Meta(AbstractUser.Meta):
+        pass
