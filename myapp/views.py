@@ -80,11 +80,18 @@ def search_blog(request):
     return render_to_response("home.html", {'blogs': blogs})
 
 def register(request):
+    redirect_to = request.POST.get('next', request.GET.get('next', ''))
     if request.method=='POST':
         form=RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/test')
+            if redirect_to:
+                return redirect(redirect_to)
+            else:
+                return redirect('/index')
     else:
         form=RegisterForm()
-    return render_to_response("register.html",{'form':form})
+    return render_to_response("register.html",{'form':form,'next': redirect_to})
+
+def index(request):
+    return render_to_response('index.html')

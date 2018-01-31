@@ -27,8 +27,10 @@
                             <p class="help text-small text-muted">{{ field.help_text|safe }}</p>
                         {% endif %}
                     {% endfor %}
-                    <button type="submit" class="btn btn-primary btn-block">注册</button>
-                </form>
+                        <form class="form" action="{% url 'register' %}" method="post">
+                            <button type="submit" class="btn btn-primary btn-block">注册</button>
+                            <input type="hidden" name="next" value="{{ next }}"/>
+                        </form>
                 <div class="flex-center top-gap text-small">
                     <a href="login.html">已有账号登录</a>
                 </div>

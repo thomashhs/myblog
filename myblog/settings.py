@@ -140,3 +140,6 @@ STATICFILES_FINDERS = ("django.contrib.staticfiles.finders.FileSystemFinder",
                        "django.contrib.staticfiles.finders.AppDirectoriesFinder",)
 
 AUTH_USER_MODEL = 'myapp.User'
+
+LOGOUT_REDIRECT_URL = '/index'
+LOGIN_REDIRECT_URL = '/index'

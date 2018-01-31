@@ -16,7 +16,6 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from myapp import views
-#from DjangoUeditor import urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -26,8 +25,9 @@ urlpatterns = [
     url(r'^time/(?P<b_time>\w+)/$', views.search_time,name="search_time"),
     url(r'^search/$', views.search_blog,name="search_blog"),
     url(r'^ueditor/',include("DjangoUeditor.urls")),
-    url(r'^register/$', views.register,name="register"),
 
+    url(r'^register/$', views.register,name="register"),
     url(r'^users/', include("django.contrib.auth.urls")),
+    url(r'^index/$', views.index,name="index"),
 ]
 
