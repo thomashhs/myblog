@@ -26,8 +26,8 @@ urlpatterns = [
     url(r'^search/$', views.search_blog,name="search_blog"),
     url(r'^ueditor/',include("DjangoUeditor.urls")),
 
-    url(r'^register/$', views.register,name="register"),
+    url(r'^users/', include('myapp.urls')),
     url(r'^users/', include("django.contrib.auth.urls")),
-    url(r'^index/$', views.index,name="index"),
+    url(r'^$', views.index,name="index"),
 ]
 

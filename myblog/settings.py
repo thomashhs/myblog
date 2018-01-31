@@ -141,5 +141,11 @@ STATICFILES_FINDERS = ("django.contrib.staticfiles.finders.FileSystemFinder",
 
 AUTH_USER_MODEL = 'myapp.User'
 
-LOGOUT_REDIRECT_URL = '/index'
-LOGIN_REDIRECT_URL = '/index'
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+
+)
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

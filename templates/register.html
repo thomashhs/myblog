@@ -17,8 +17,10 @@
     <div class="container">
         <div class="flex-center">
             <div class="unit-1-2 unit-1-on-mobile">
+                <h1><a href="{% url 'index' %}">Django Auth Example</a></h1>
                 <h3>注册</h3>
-                <form class="form" action="{% url 'register' %}" method="post">
+                <form class="form" action="{% url 'myapp:register' %}" method="post">
+                    {% csrf_token %}
                     {% for field in form %}
                         {{ field.label_tag }}
                         {{ field }}
@@ -27,12 +29,11 @@
                             <p class="help text-small text-muted">{{ field.help_text|safe }}</p>
                         {% endif %}
                     {% endfor %}
-                        <form class="form" action="{% url 'register' %}" method="post">
-                            <button type="submit" class="btn btn-primary btn-block">注册</button>
-                            <input type="hidden" name="next" value="{{ next }}"/>
-                        </form>
+                    <button type="submit" class="btn btn-primary btn-block">注册</button>
+                    <input type="hidden" name="next" value="{{ next }}"/>
+                </form>
                 <div class="flex-center top-gap text-small">
-                    <a href="login.html">已有账号登录</a>
+                    <a href="{% url 'login' %}">已有账号登录</a>
                 </div>
             </div>
         </div>
