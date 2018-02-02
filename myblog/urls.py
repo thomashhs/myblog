@@ -29,5 +29,7 @@ urlpatterns = [
     url(r'^users/', include('myapp.urls')),
     url(r'^users/', include("django.contrib.auth.urls")),
     url(r'^$', views.index,name="index"),
+
+    url(r'^index/', include('newblog.urls')),
 ]
 

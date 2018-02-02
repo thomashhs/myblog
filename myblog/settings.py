@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'myapp',
     'myapp.templatetags.custom_markdown',
     'DjangoUeditor',
+    'newblog',
 ]
 
 MIDDLEWARE = [
@@ -149,3 +150,8 @@ LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+
+
+#newblog
