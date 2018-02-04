@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'myapp.templatetags.custom_markdown',
     'DjangoUeditor',
     'newblog',
+    'comments',
 ]
 
 MIDDLEWARE = [
