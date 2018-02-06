@@ -1,8 +1,9 @@
 from django.shortcuts import render,HttpResponse,get_object_or_404
-from newblog.models import Post,Category
+from newblog.models import Post,Category,Tag
 from comments.forms import CommentForm
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.views.generic import ListView
+import markdown
 
 class IndexView(ListView):
     model = Post
@@ -150,6 +151,15 @@ class CategoryView(ListView):
         cate = get_object_or_404(Category, pk=self.kwargs.get('pk'))
         return super(CategoryView,self).get_queryset().filter(category=cate)
 
+class TagView(ListView):
+    model = Post
+    template_name = 'newblog/index.html'
+    context_object_name = 'post_list'
+
+    def get_queryset(self):
+        tag = get_object_or_404(Tag, pk=self.kwargs.get('pk'))
+        return super(TagView, self).get_queryset().filter(tags=tag)
+
 class ArchivesView(ListView):
     model = Post
     template_name = 'newblog/index.html'
@@ -176,9 +186,17 @@ def index(request):
 
 def detail(request,pk):
     post=get_object_or_404(Post,pk=pk)
+
     post.increase_views()
+
     form=CommentForm()
     comment_list=post.comment_set.all()
+    post.body = markdown.markdown(post.body,
+                                  extensions=[
+                                      'markdown.extensions.extra',
+                                      'markdown.extensions.codehilite',
+                                      'markdown.extensions.toc',
+                                  ])
     return render(request,'newblog/detail.html',context={'post':post,'form':form,'comment_list':comment_list})
 """
 def archives(request,year,month):
@@ -191,3 +209,4 @@ def category(request,pk):
     post_list=Post.objects.filter(category=cate).order_by('-created_time')
     return render(request,'newblog/index.html',context={'post_list':post_list})
 """
+

@@ -15,11 +15,17 @@
                             <span class="views-count"><a href="#">{{ post.views }} 阅读</a></span>
                         </div>
                     </header>
+
                     <div class="entry-content clearfix">
-                        <p>{{ post.body }}</p>
-                        <div class="read-more cl-effect-14">
-                            <a href="{% url 'detail' pk=post.pk %}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
-                        </div>
+                         {{ post.body|safe }}
+                        <div class="widget-tag-cloud">
+                         <ul>
+                         标签：
+                         {% for tag in post.tags.all %}
+                            <li><a href="{% url 'tag' tag.pk %}"># {{ tag.name }}</a></li>
+                         {% endfor %}
+                         </ul>
+                         </div>
                     </div>
                 </article>
 
