@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from myapp import views
+from newblog.feeds import AllPostsRssFeed
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -33,6 +34,6 @@ urlpatterns = [
     url(r'^newblog/', include('newblog.urls')),
 
     url(r'^comments/', include('comments.urls')),
-
+    url(r'^all/rss/$', AllPostsRssFeed(), name='rss'),
 ]
 
