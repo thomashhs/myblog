@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^(?P<b_id>\d+)/$', views.detail,name="detail"),
     url(r'^tag/(?P<b_tag>\w+)/$', views.search_tag,name="search_tag"),
     url(r'^time/(?P<b_time>\w+)/$', views.search_time,name="search_time"),
-    url(r'^search/$', views.search_blog,name="search_blog"),
+ #   url(r'^search/$', views.search_blog,name="search_blog"),
     url(r'^ueditor/',include("DjangoUeditor.urls")),
 
     url(r'^users/', include('myapp.urls')),
@@ -35,5 +35,7 @@ urlpatterns = [
 
     url(r'^comments/', include('comments.urls')),
     url(r'^all/rss/$', AllPostsRssFeed(), name='rss'),
+
+    url(r'^find/', include('haystack.urls')),
 ]
 

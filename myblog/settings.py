@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'DjangoUeditor',
     'newblog',
     'comments',
+    'haystack',
 ]
 
 MIDDLEWARE = [
@@ -152,7 +153,12 @@ LOGIN_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-
-
-
 #newblog
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'newblog.whoosh_cn_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    },
+}
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
